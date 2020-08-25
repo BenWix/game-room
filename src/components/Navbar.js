@@ -1,28 +1,24 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
+import {Navbar, NavItem, Nav} from 'reactstrap'
 
-const Navbar = () => {
+const NavBar = () => {
     return (
-      <div className='navbar'>
+      <Navbar color='info' light expand='md'>
+        <Nav className='mr-auto' navbar>
+            <NavItem>
+                <NavLink to='/'>Home</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink to="/tictactoe">TicTacToe</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink to="/contributors">Contributors</NavLink>
+            </NavItem>
+        </Nav>
 
-        <NavLink 
-            to='/'
-        >
-          Home
-        </NavLink>
-        <NavLink 
-          to="/tictactoe"
-        >
-          TicTacToe
-        </NavLink>
-        <NavLink 
-          to="/contributors"
-        >
-          Contributors
-        </NavLink>
-
-      </div>
+      </Navbar>
     );
   }
   
-  export default Navbar;
+  export default NavBar;
