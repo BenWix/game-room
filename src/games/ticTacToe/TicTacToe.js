@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import Board from './components/Board'
 
+import GameInfo from '../GameInfo'
+
 import {Button} from 'reactstrap'
 
 import './TicTacToe.css'
+import '../../App.css'
 
 export default class TicTacToe extends Component {
     constructor(props) {
@@ -46,7 +49,8 @@ export default class TicTacToe extends Component {
         const history = this.state.history
         const current = history[this.state.stepNumber]
         const winner = calculateWinner(current.squares)
-        
+        const about = 'this game was adapted from the tutorial from reactjs.org'
+        const contributors = 'Ben Wichser'
         const moves = history.map((step, move) => {
             const desc = move ? 'Go to move #' + move : 'Go to game start'
             return( 
@@ -76,6 +80,7 @@ export default class TicTacToe extends Component {
                     <div>{status}</div>
                     <ul>{moves}</ul>
                 </div>
+                <GameInfo about={about} contributors={contributors}/>
             </div>
         )
     }
