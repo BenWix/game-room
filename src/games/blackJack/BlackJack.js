@@ -42,7 +42,7 @@ export default class BlackJack extends Component {
                 <PlayerHand hand={this.state.hand}/>
 
                 <PlayerActions hand={this.state.hand}/>
-                <PlayerScore />
+                <PlayerScore score={this.state.score}/>
                 {/* GameInfo must remain at the bottom of your root component */}
                 <GameInfo about={about} contributors={contributors} />
             </div>
