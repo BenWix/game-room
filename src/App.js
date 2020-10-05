@@ -6,6 +6,8 @@ import About from './components/About'
 import Contributors from './components/Contributors'
 
 import TicTacToe from './games/ticTacToe/TicTacToe' 
+import BlackJack from './games/blackJack/BlackJack' 
+
 
 import './App.css';
 
@@ -17,6 +19,8 @@ function App() {
         <div className='body'>
         <Route exact path='/' component={About} />
         <Route path='/tictactoe' component={TicTacToe} />
+        <Route path='/blackjack' component={BlackJack} />
+
         <Route path='/contributors' component={Contributors} />    
         </div>
       </Router>
