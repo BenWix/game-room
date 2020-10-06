@@ -38,7 +38,7 @@ export default class BlackJack extends Component {
         {/* Player's hand */}
         <PlayerHand hand={this.state.hand} />
 
-        <PlayerActions hand={this.state.hand} />
+        <PlayerActions hand={this.state.hand} deck={this.state.deck} />
         <PlayerScore />
         {/* GameInfo must remain at the bottom of your root component */}
         <GameInfo about={about} contributors={contributors} />
@@ -69,6 +69,6 @@ function getDeck(count = 1) {
       deck.push(num + suit);
     });
   });
-  console.log(deck);
+  //   console.log(deck);
   return deck;
 }

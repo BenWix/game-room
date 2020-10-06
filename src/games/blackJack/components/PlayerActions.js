@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 
-const PlayerActions = () => {
+const PlayerActions = (props) => {
   const [hand, setHand] = useState([]);
-
   const addCard = () => {
     setHand([
       ...hand,
       {
         id: hand.length,
-        value: Math.floor(Math.random() * 10) + 1,
+        value: props.deck[Math.floor(Math.random() * props.deck.length)],
       },
     ]);
   };
@@ -27,9 +26,6 @@ const PlayerActions = () => {
       </ul>
 
       <button onClick={addCard}>Draw card</button>
-      {/* should draw one card each time buton is pressed.  */}
-
-      {console.log(hand)}
 
       {/* A button to reset the hand */}
       <button onClick={clearHand}>Reset Hand</button>
