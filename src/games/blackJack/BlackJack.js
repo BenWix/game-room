@@ -32,7 +32,7 @@ export default class BlackJack extends Component {
   render() {
     // Modify the two following variables to make sure the correct info is presented about the game
     const about = "A simple low stakes game of blackjack";
-    const contributors = "A string of the contributors for this page";
+    const contributors = "Ben and Nashmeyah";
 
     return (
       <div>
