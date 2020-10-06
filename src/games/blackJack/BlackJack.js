@@ -21,11 +21,14 @@ export default class BlackJack extends Component {
       score: 0,
       deck: [],
     };
+
+    this.addCard = this.addCard.bind(this)
+    this.resetHand = this.resetHand.bind(this)
   }
 
   componentDidMount() {
     this.setState({
-      deck: getDeck(),
+      deck: this.getDeck(),
     });
   }
 
@@ -39,37 +42,58 @@ export default class BlackJack extends Component {
         {/* Player's hand */}
         <PlayerHand hand={this.state.hand} />
 
-        <PlayerActions hand={this.state.hand} deck={this.state.deck} />
+        <PlayerActions hand={this.state.hand} deck={this.state.deck} addCard={this.addCard} resetHand={this.resetHand}/>
         <PlayerScore />
         {/* GameInfo must remain at the bottom of your root component */}
         <GameInfo about={about} contributors={contributors} />
       </div>
     );
   }
-}
-function getDeck(count = 1) {
-  const deck = [];
-  const suits = ["S", "D", "C", "H"];
-  const numbers = [
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "J",
-    "Q",
-    "K",
-    "A",
-  ];
-  numbers.forEach((num) => {
-    suits.forEach((suit) => {
-      deck.push(num + suit);
+
+  addCard(){
+    const val = Math.floor(Math.random() * this.state.deck.length )
+    const new_card = this.state.deck[val]
+
+    const new_deck = [...this.state.deck]
+    new_deck.splice(val, 1)
+    
+    this.setState({
+      hand: [...this.state.hand, new_card],
+      deck: new_deck
+    })
+  }
+
+  resetHand() {
+    this.setState({
+      hand: [],
+      deck: this.getDeck()
+    })
+  }
+  
+  getDeck(count = 1) {
+    const deck = [];
+    const suits = ["S", "D", "C", "H"];
+    const numbers = [
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "J",
+      "Q",
+      "K",
+      "A",
+    ];
+    numbers.forEach((num) => {
+      suits.forEach((suit) => {
+        deck.push(num + suit);
+      });
     });
-  });
-  //   console.log(deck);
-  return deck;
+    //   console.log(deck);
+    return deck;
+  }
 }
