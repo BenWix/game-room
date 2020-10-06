@@ -35,7 +35,7 @@ export default class BlackJack extends Component {
   render() {
     // Modify the two following variables to make sure the correct info is presented about the game
     const about = "A simple low stakes game of blackjack";
-    const contributors = "A string of the contributors for this page";
+    const contributors = "Ben and Nashmeyah";
 
     return (
       <div>
@@ -43,7 +43,7 @@ export default class BlackJack extends Component {
         <PlayerHand hand={this.state.hand} />
 
         <PlayerActions hand={this.state.hand} deck={this.state.deck} addCard={this.addCard} resetHand={this.resetHand}/>
-        <PlayerScore />
+        <PlayerScore hand={this.state.hand}/>
         {/* GameInfo must remain at the bottom of your root component */}
         <GameInfo about={about} contributors={contributors} />
       </div>
