@@ -5,7 +5,7 @@ export default class PlayerHand extends Component {
         return (
             <React.Fragment>
                 <h2>Player's Hand</h2>
-                <h3>{this.props.hand}</h3>
+                <h3>{this.props.playerhand}</h3>
             </React.Fragment>
         )
     }
