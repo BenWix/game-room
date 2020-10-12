@@ -1,17 +1,37 @@
-import React, { Component } from 'react'
+import React from "react";
 
-export default class PlayerActions extends Component {
-    render() {
-        return (
-            <React.Fragment>
-                
-                {/* A button to Draw a card */}
-                <button>Draw card</button>
+const PlayerActions = (props) => {
+  // const [hand, setHand] = useState([]);
+  // const addCard = () => {
+  //   setHand([
+  //     ...hand,
+  //     {
+  //       id: hand.length,
+  //       value: props.deck[Math.floor(Math.random() * props.deck.length)],
+  //     },
+  //   ]);
+  // };
 
-                {/* A button to reset the hand */}
-                <button>Reset Hand</button>
-                
-            </React.Fragment>
-        )
-    }
-}
+  // const clearHand = () => {
+  //   setHand([]);
+  // };
+
+  return (
+    <React.Fragment>
+      {/* A button to Draw a card */}
+      {/* <ul>
+        {props.hand.map((card) => (
+          <li >{card.value}</li>
+        ))}
+      </ul> */}
+
+      <button onClick={props.addCard}>Draw card</button>
+
+      {/* A button to reset the hand */}
+      <button onClick={props.resetHand}>Reset Hand</button>
+
+      {/* resets the hand count i.e resets the state in BlackJack component */}
+    </React.Fragment>
+  );
+};
+export default PlayerActions;
