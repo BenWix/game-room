@@ -33,7 +33,6 @@ export default class BlackJack extends Component {
   }
 
   startGame =()=>{
-
     let val = Math.floor(Math.random() * this.state.deck.length);
     const new_card = this.state.deck[val];
 
@@ -67,7 +66,7 @@ export default class BlackJack extends Component {
     if(this.state.playing == true){
       return (
       <div >
-        <div class="player">
+        <div className="player">
           <PlayerHand playerhand={this.state.playerhand} />
           <PlayerActions
             playerhand={this.state.playerhand}
@@ -79,7 +78,7 @@ export default class BlackJack extends Component {
           <h3>Player Score: {this.getScore(this.state.playerhand)}</h3>
         </div>
         
-        <div class="dealer">
+        <div className="dealer">
           <h2>Dealer's Hand <br/>{this.state.dealerhand}</h2>
           <DealerActions
             dealerhand={this.state.dealerhand}
@@ -148,9 +147,9 @@ export default class BlackJack extends Component {
   getScore(playerhand){
     let aces = 0;
     let base_score = 0;
-    console.log("function called");
+    // console.log("function called");
     playerhand.forEach((card) => {
-      console.log("card counted");
+      // console.log("card counted");
       if (
         card[0] === "K" ||
         card[0] === "Q" ||
@@ -180,23 +179,30 @@ export default class BlackJack extends Component {
     } else {
       current_score = "Bust";
     }
-    console.log(current_score);
+    // console.log(current_score);
     return current_score;
   };
 
   playerStayButton =()=>{
-    //function, if player hits stay, dealer keeps pulling cards till score == "Bust" or <= 21
     
-    if(this.getScore(this.state.dealerhand) < this.getScore(this.state.playerhand)){
-      if(this.getScore(this.state.dealerhand) < 21){
-         this.addCardToDealer()
-      }
-      console.log("Dealer Wins")
+    console.log("Stay button clicked")
+    let dealerScore = this.getScore(this.state.dealerhand)
+    while(dealerScore < 17){
+      this.addCardToDealer()   
     }
 
-    if(this.getScore(this.state.dealerhand) == "Bust"){
-      console.log("player wins")
+    if(this.getScore(this.state.dealerhand) > 21){
+      console.log("Dealer Bust, Player Wins")
+    }else{
+      if (this.getScore(this.state.dealerhand) > this.getScore(this.state.playerhand) && this.getScore(this.state.dealerhand) <=21) {
+          console.log("Dealer Wins")
+      } else if (this.getScore(this.state.dealerhand) < this.getScore(this.state.playerhand) && this.getScore(this.state.playerhand) <=21) {
+          console.log("Player Wins")
+      } else {
+          console.log("Push")
+      }
     }
+    
   }
 
 
