@@ -186,18 +186,33 @@ export default class BlackJack extends Component {
   playerStayButton =()=>{
     
     console.log("Stay button clicked")
-    
+
     // set variables just for the purpose of the code being easier to read.
     let dealerScore = this.getScore(this.state.dealerhand)
     let playerscore = this.getScore(this.state.playerhand)
 
-    // i did a while loop in place of this and it crashed my browser.
-    if(dealerScore < 17){
-      this.addCardToDealer()
-      console.log("Card added to dealer")   
+    if(this.getScore(this.state.dealerhand) < playerscore){
+      const dealerhand = this.state.dealerhand
+      const deck = this.state.deck
+      let new_card
+
+      while(this.getScore(dealerhand) != "Bust" || this.getScore(dealerhand) < playerscore){
+        let val = Math.floor(Math.random() * deck.length);
+        new_card = deck[val];
+
+        deck.splice(val, 1);
+        dealerhand.push(new_card)
+        console.log(this.getScore(dealerhand))
+      }
+
+      this.setState({
+        dealerhand: dealerhand,
+        deck: deck
+      })
+      // console.log("Card added to dealer")   
     }
 
-    if(dealerScore > 21){
+    if(dealerScore == "Bust"){
       console.log("Dealer Bust, Player Wins")
     }else{
       if (dealerScore > playerscore && dealerScore <=21) {
@@ -208,9 +223,9 @@ export default class BlackJack extends Component {
           console.log("Push")
       }
     }
+    console.log(this.state.dealerhand)
     
   }
-
 
   getDeck(count = 1) {
     const deck = [];
