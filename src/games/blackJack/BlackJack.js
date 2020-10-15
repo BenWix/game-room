@@ -4,7 +4,7 @@ import PlayerHand from "./components/PlayerHand";
 import PlayerActions from "./components/PlayerActions";
 import PlayerScore from "./components/PlayerScore";
 
-import DealerActions from "./components/DealerActions"
+import DealerActions from "./components/DealerActions";
 
 import GameInfo from "../GameInfo";
 
@@ -23,7 +23,6 @@ export default class BlackJack extends Component {
       dealerhand: [],
       playing: false,
     };
-    
   }
 
   componentDidMount() {
@@ -32,7 +31,7 @@ export default class BlackJack extends Component {
     });
   }
 
-  startGame =()=>{
+  startGame = () => {
     let val = Math.floor(Math.random() * this.state.deck.length);
     const new_card = this.state.deck[val];
 
@@ -53,56 +52,64 @@ export default class BlackJack extends Component {
       playerhand: [new_card, second_new_card],
       dealerhand: [dealer_card],
       deck: new_deck,
-      playing: true
+      playing: true,
     });
-  }
+  };
 
-  
   render() {
     // Modify the two following variables to make sure the correct info is presented about the game
     const about = "A simple low stakes game of blackjack";
     const contributors = "Ben and Nashmeyah";
 
-    if(this.state.playing == true){
+    if (this.state.playing == true) {
       return (
-      <div >
-        <div className="player">
-          <PlayerHand playerhand={this.state.playerhand} />
-          <PlayerActions
-            playerhand={this.state.playerhand}
-            deck={this.state.deck}
-            addCardToPlayer={this.addCardToPlayer}
-            resetPlayerHand={this.resetPlayerHand}
-            playerStayButton={this.playerStayButton}
-          />
-          <h3>Player Score: {this.getScore(this.state.playerhand)}</h3>
-        </div>
-        
-        <div className="dealer">
-          <h2>Dealer's Hand <br/>{this.state.dealerhand}</h2>
-          <DealerActions
-            dealerhand={this.state.dealerhand}
-            deck={this.state.deck}
-            addCardToDealer={this.addCardToDealer}
-            resetDealerHand={this.resetDealerHand}
-          />
-          <h3>Dealer Score: {this.getScore(this.state.dealerhand)}</h3>
-        </div>
-
-        {/* GameInfo must remain at the bottom of your root component */}
-        <GameInfo about={about} contributors={contributors} />
-      </div>
-    );
-    } else {
-        return (
-          <div>
-            <button onClick={this.startGame}>Start Game</button>
+        <div>
+          <div className="player">
+            <PlayerHand playerhand={this.state.playerhand} />
+            <PlayerActions
+              playerhand={this.state.playerhand}
+              deck={this.state.deck}
+              addCardToPlayer={this.addCardToPlayer}
+              resetPlayerHand={this.resetPlayerHand}
+              playerStayButton={this.playerStayButton}
+            />
+            <h3 style={{ color: "green" }}>
+              Player Score: {this.getScore(this.state.playerhand)}
+            </h3>
           </div>
-        )
+
+          <div className="dealer">
+            <h2>
+              Dealer's Hand <br />
+              {this.state.dealerhand}
+            </h2>
+            <DealerActions
+              dealerhand={this.state.dealerhand}
+              deck={this.state.deck}
+              addCardToDealer={this.addCardToDealer}
+              resetDealerHand={this.resetDealerHand}
+            />
+            <h3 style={{ color: "green" }}>
+              Dealer Score: {this.getScore(this.state.dealerhand)}
+            </h3>
+          </div>
+          <button onClick={this.startGame} className="reset">
+            Reset Game
+          </button>
+          {/* GameInfo must remain at the bottom of your root component */}
+          <GameInfo about={about} contributors={contributors} />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <button onClick={this.startGame}>Start Game</button>
+        </div>
+      );
     }
   }
 
-  addCardToPlayer=() =>{
+  addCardToPlayer = () => {
     const val = Math.floor(Math.random() * this.state.deck.length);
     const new_card = this.state.deck[val];
 
@@ -115,9 +122,9 @@ export default class BlackJack extends Component {
     });
     // console.log("card was added")
     // console.log(this.state.playerhand)
-  }
+  };
 
-  addCardToDealer=()=>{
+  addCardToDealer = () => {
     const val = Math.floor(Math.random() * this.state.deck.length);
     const new_card = this.state.deck[val];
 
@@ -128,23 +135,9 @@ export default class BlackJack extends Component {
       dealerhand: [...this.state.dealerhand, new_card],
       deck: new_deck,
     });
-  }
+  };
 
-  resetPlayerHand=() =>{
-    this.setState({
-      playerhand: [],
-      deck: this.getDeck(),
-    });
-  }
-
-  resetDealerHand=()=> {
-    this.setState({
-      dealerhand: [],
-      deck: this.getDeck(),
-    });
-  }
-  
-  getScore(playerhand){
+  getScore(playerhand) {
     let aces = 0;
     let base_score = 0;
     // console.log("function called");
@@ -181,51 +174,46 @@ export default class BlackJack extends Component {
     }
     // console.log(current_score);
     return current_score;
-  };
+  }
 
-  playerStayButton =()=>{
-    
-    console.log("Stay button clicked")
+  playerStayButton = () => {
+    console.log("Stay button clicked");
 
     // set variables just for the purpose of the code being easier to read.
-    let dealerScore = this.getScore(this.state.dealerhand)
-    let playerscore = this.getScore(this.state.playerhand)
+    let dealerScore = this.getScore(this.state.dealerhand);
+    let playerscore = this.getScore(this.state.playerhand);
 
-    if(this.getScore(this.state.dealerhand) < playerscore){
-      const dealerhand = this.state.dealerhand
-      const deck = this.state.deck
-      let new_card
+    if (this.getScore(this.state.dealerhand) < playerscore) {
+      const dealerhand = [...this.state.dealerhand];
+      const deck = [...this.state.deck];
+      let new_card;
 
-      while(this.getScore(dealerhand) != "Bust" || this.getScore(dealerhand) < playerscore){
+      while (
+        this.getScore(dealerhand) != "Bust" &&
+        this.getScore(dealerhand) < playerscore
+      ) {
+        console.log(this.getScore(dealerhand));
+
         let val = Math.floor(Math.random() * deck.length);
         new_card = deck[val];
 
         deck.splice(val, 1);
-        dealerhand.push(new_card)
-        console.log(this.getScore(dealerhand))
+        dealerhand.push(new_card);
       }
-
       this.setState({
         dealerhand: dealerhand,
-        deck: deck
-      })
-      // console.log("Card added to dealer")   
+        deck: deck,
+      });
+      console.log(this.state.dealerhand);
     }
 
-    if(dealerScore == "Bust"){
-      console.log("Dealer Bust, Player Wins")
-    }else{
-      if (dealerScore > playerscore && dealerScore <=21) {
-          console.log("Dealer Wins")
-      } else if (dealerScore < playerscore && playerscore <=21) {
-          console.log("Player Wins")
-      } else {
-          console.log("Push")
-      }
+    dealerScore = this.getScore(this.state.dealerhand);
+    if (dealerScore == "Bust") {
+      console.log("Player Wins");
+    } else {
+      console.log("Dealer Wins");
     }
-    console.log(this.state.dealerhand)
-    
-  }
+  };
 
   getDeck(count = 1) {
     const deck = [];
