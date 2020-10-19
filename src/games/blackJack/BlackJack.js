@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import PlayerHand from "./components/PlayerHand";
 import PlayerActions from "./components/PlayerActions";
-import PlayerScore from "./components/PlayerScore";
+// import PlayerScore from "./components/PlayerScore";
 
 import DealerActions from "./components/DealerActions";
 
@@ -22,6 +22,7 @@ export default class BlackJack extends Component {
       deck: [],
       dealerhand: [],
       playing: false,
+      winner: "",
     };
   }
 
@@ -53,15 +54,32 @@ export default class BlackJack extends Component {
       dealerhand: [dealer_card],
       deck: new_deck,
       playing: true,
+      winner: "",
+    });
+  };
+
+  resetGame = () => {
+    this.setState({ deck: this.getDeck() }, () => {
+      this.startGame();
     });
   };
 
   render() {
+    const winner = () => {
+      if (this.state.winner === "player") {
+        return <div style={{ color: "red" }}>Player Won!!!</div>;
+      }
+
+      if (this.state.winner === "dealer") {
+        return <div style={{ color: "red" }}>Dealer Won!!!</div>;
+      }
+    };
+
     // Modify the two following variables to make sure the correct info is presented about the game
     const about = "A simple low stakes game of blackjack";
     const contributors = "Ben and Nashmeyah";
 
-    if (this.state.playing == true) {
+    if (this.state.playing === true) {
       return (
         <div>
           <div className="player">
@@ -93,9 +111,10 @@ export default class BlackJack extends Component {
               Dealer Score: {this.getScore(this.state.dealerhand)}
             </h3>
           </div>
-          <button onClick={this.startGame} className="reset">
+          <button onClick={this.resetGame} className="reset">
             Reset Game
           </button>
+          {winner()}
           {/* GameInfo must remain at the bottom of your root component */}
           <GameInfo about={about} contributors={contributors} />
         </div>
@@ -180,6 +199,7 @@ export default class BlackJack extends Component {
     console.log("Stay button clicked");
 
     // set variables just for the purpose of the code being easier to read.
+    let winner;
     let dealerScore = this.getScore(this.state.dealerhand);
     let playerscore = this.getScore(this.state.playerhand);
 
@@ -189,7 +209,7 @@ export default class BlackJack extends Component {
       let new_card;
 
       while (
-        this.getScore(dealerhand) != "Bust" &&
+        this.getScore(dealerhand) !== "Bust" &&
         this.getScore(dealerhand) < playerscore
       ) {
         console.log(this.getScore(dealerhand));
@@ -208,10 +228,16 @@ export default class BlackJack extends Component {
     }
 
     dealerScore = this.getScore(this.state.dealerhand);
-    if (dealerScore == "Bust") {
-      console.log("Player Wins");
+    if (dealerScore === "Bust" && playerscore <= 21) {
+      // console.log("Player Wins");
+      this.setState({
+        winner: "player",
+      });
     } else {
-      console.log("Dealer Wins");
+      // console.log("Dealer Wins");
+      this.setState({
+        winner: "dealer",
+      });
     }
   };
 
