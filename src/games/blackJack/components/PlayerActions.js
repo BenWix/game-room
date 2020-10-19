@@ -1,15 +1,15 @@
 import React from "react";
 
 const PlayerActions = (props) => {
+ 
   return (
     <React.Fragment>
       <button onClick={props.addCardToPlayer}>Hit</button>
-
-      {/* A button to reset the hand */}
-      <button onClick={props.resetPlayerHand}>Reset Hand</button>
-
-      {/* resets the hand count i.e resets the state in BlackJack component */}
+      <button onClick={props.playerStayButton}>Stay</button>
+      
     </React.Fragment>
   );
 };
 export default PlayerActions;
+
+
