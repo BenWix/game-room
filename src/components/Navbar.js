@@ -10,12 +10,6 @@ const NavBar = () => {
                 <NavLink to='/'>Home</NavLink>
             </NavItem>
             <NavItem>
-                <NavLink to="/tictactoe">TicTacToe</NavLink>
-            </NavItem>
-            <NavItem>
-                <NavLink to="/blackjack">Blackjack</NavLink>
-            </NavItem>
-            <NavItem>
                 <NavLink to="/contributors">Contributors</NavLink>
             </NavItem>
         </Nav>

@@ -17,8 +17,6 @@ function App() {
         <NavBar />
         <div className="body">
           <Route exact path="/" component={About} />
-          <Route path="/tictactoe" component={TicTacToe} />
-          <Route path="/blackjack" component={BlackJack} />
 
           <Route path="/contributors" component={Contributors} />
         </div>
