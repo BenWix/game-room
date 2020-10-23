@@ -2,10 +2,7 @@ import React, { Component } from "react";
 
 import PlayerHand from "./components/PlayerHand";
 import PlayerActions from "./components/PlayerActions";
-// import PlayerScore from "./components/PlayerScore";
-
 import DealerActions from "./components/DealerActions";
-
 import GameInfo from "../GameInfo";
 
 //for buttons and alerts and other similar things, please use reactstrap, unless you
