@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-
-import PlayerHand from "./components/PlayerHand";
+// import PlayerHand from "./components/PlayerHand";
 import PlayerActions from "./components/PlayerActions";
 import DealerActions from "./components/DealerActions";
+import Cards from "./components/Cards";
 import GameInfo from "../GameInfo";
 
 //for buttons and alerts and other similar things, please use reactstrap, unless you
@@ -80,7 +80,8 @@ export default class BlackJack extends Component {
       return (
         <div>
           <div className="player">
-            <PlayerHand playerhand={this.state.playerhand} />
+            {/* <PlayerHand playerhand={this.state.playerhand} /> */}
+            <Cards playerhand={this.state.playerhand} />
             <PlayerActions
               playerhand={this.state.playerhand}
               deck={this.state.deck}
@@ -108,6 +109,7 @@ export default class BlackJack extends Component {
               Dealer Score: {this.getScore(this.state.dealerhand)}
             </h3>
           </div>
+
           <button onClick={this.resetGame} className="reset">
             Reset Game
           </button>
@@ -119,7 +121,9 @@ export default class BlackJack extends Component {
     } else {
       return (
         <div>
-          <button onClick={this.startGame}>Start Game</button>
+          <button color="primary" size="large" onClick={this.startGame}>
+            Start Game
+          </button>
         </div>
       );
     }
@@ -153,11 +157,11 @@ export default class BlackJack extends Component {
     });
   };
 
-  getScore(playerhand) {
+  getScore(deck) {
     let aces = 0;
     let base_score = 0;
     // console.log("function called");
-    playerhand.forEach((card) => {
+    deck.forEach((card) => {
       // console.log("card counted");
       if (
         card[0] === "K" ||
@@ -199,7 +203,7 @@ export default class BlackJack extends Component {
     let dealerScore = this.getScore(this.state.dealerhand);
     let playerscore = this.getScore(this.state.playerhand);
 
-    let dealerhand
+    let dealerhand;
     if (this.getScore(this.state.dealerhand) < playerscore) {
       dealerhand = [...this.state.dealerhand];
       const deck = [...this.state.deck];
@@ -224,11 +228,10 @@ export default class BlackJack extends Component {
       console.log(this.state.dealerhand);
     }
 
-    
     dealerScore = this.getScore(dealerhand);
-    
-    console.log(`Player Score: ${playerscore}`)
-    console.log(`Dealer Score: ${dealerScore}`)
+
+    console.log(`Player Score: ${playerscore}`);
+    console.log(`Dealer Score: ${dealerScore}`);
 
     if (dealerScore === "Bust" && playerscore <= 21) {
       console.log("Player Wins");
