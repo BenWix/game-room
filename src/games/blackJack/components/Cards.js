@@ -1,10 +1,12 @@
 import React from "react";
 
 const Cards = ({ playerhand }) => {
+  // style for cards
   const card = {
     height: "150px",
     width: "100px",
   };
+
   if (playerhand.includes("2C")) {
     return (
       <div>
