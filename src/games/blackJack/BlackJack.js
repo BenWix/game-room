@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PlayerHand from "./components/PlayerHand";
 import PlayerActions from "./components/PlayerActions";
 import DealerActions from "./components/DealerActions";
-import Cards from "./components/Cards";
 import GameInfo from "../GameInfo";
 
 //for buttons and alerts and other similar things, please use reactstrap, unless you
@@ -62,6 +61,22 @@ export default class BlackJack extends Component {
   };
 
   render() {
+    //"2px solid red"
+    const cardStyle = {
+      height: "150px",
+      width: "100px",
+      border: "4px solid red",
+      display: "inline-flex",
+      margin: "5px",
+      padding: "10px",
+      fontSize: "55px",
+      alignItems: "center",
+    };
+
+    const dealerCards = this.state.dealerhand.map((card) => {
+      return <p style={cardStyle}>{card}</p>;
+    });
+
     const winner = () => {
       if (this.state.winner === "player") {
         return <div style={{ color: "red" }}>Player Won!!!</div>;
@@ -81,7 +96,7 @@ export default class BlackJack extends Component {
         <div>
           <div className="player">
             <PlayerHand playerhand={this.state.playerhand} />
-            <Cards playerhand={this.state.playerhand} />
+            <br></br>
             <PlayerActions
               playerhand={this.state.playerhand}
               deck={this.state.deck}
@@ -97,7 +112,7 @@ export default class BlackJack extends Component {
           <div className="dealer">
             <h2>
               Dealer's Hand <br />
-              {this.state.dealerhand}
+              {dealerCards}
             </h2>
             <DealerActions
               dealerhand={this.state.dealerhand}
