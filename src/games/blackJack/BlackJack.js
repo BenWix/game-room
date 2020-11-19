@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import PlayerHand from "./components/PlayerHand";
+import PlayerHand from "./components/PlayerHand";
 import PlayerActions from "./components/PlayerActions";
 import DealerActions from "./components/DealerActions";
 import Cards from "./components/Cards";
@@ -80,7 +80,7 @@ export default class BlackJack extends Component {
       return (
         <div>
           <div className="player">
-            {/* <PlayerHand playerhand={this.state.playerhand} /> */}
+            <PlayerHand playerhand={this.state.playerhand} />
             <Cards playerhand={this.state.playerhand} />
             <PlayerActions
               playerhand={this.state.playerhand}
@@ -197,7 +197,7 @@ export default class BlackJack extends Component {
   }
 
   playerStayButton = () => {
-    console.log("Stay button clicked");
+    // console.log("Stay button clicked");
 
     // set variables just for the purpose of the code being easier to read.
     let dealerScore = this.getScore(this.state.dealerhand);
@@ -248,7 +248,7 @@ export default class BlackJack extends Component {
 
   getDeck(count = 1) {
     const deck = [];
-    const suits = ["S", "D", "C", "H"];
+    const suits = ["♠️", "♦️", "♣️", "♥️"];
     const numbers = [
       "2",
       "3",
