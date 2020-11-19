@@ -98,6 +98,7 @@ export default class BlackJack extends Component {
             <PlayerHand playerhand={this.state.playerhand} />
             <br></br>
             <PlayerActions
+              playerscore={this.getScore(this.state.playerhand)}
               playerhand={this.state.playerhand}
               deck={this.state.deck}
               addCardToPlayer={this.addCardToPlayer}
