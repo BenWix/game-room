@@ -10,7 +10,7 @@ const PlayerActions = (props) => {
         Hit
       </button>
       <button
-        // disabled={props.playerscore === "Bust"}
+        disabled={props.playerscore === "Bust"}
         onClick={props.playerStayButton}
       >
         Stay
