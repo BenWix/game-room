@@ -37,7 +37,7 @@ export default class Contributors extends Component {
               creativty to expand daily. Check out her work
               <a href="https://github.com/Nashmeyah"> GitHub</a> or her personal
               website,
-              <a href="https://nashmeyah.com/"> bwichser.com</a>
+              <a href="https://nashmeyah.com/"> Nashmeyah.com</a>
             </CardText>
           </Card>
         </Col>

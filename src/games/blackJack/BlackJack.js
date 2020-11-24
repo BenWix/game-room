@@ -61,7 +61,6 @@ export default class BlackJack extends Component {
   };
 
   render() {
-    //"2px solid red"
     const cardStyle = {
       height: "150px",
       width: "100px",
@@ -156,8 +155,12 @@ export default class BlackJack extends Component {
       playerhand: [...this.state.playerhand, new_card],
       deck: new_deck,
     });
-    // console.log("card was added")
-    // console.log(this.state.playerhand)
+
+    if (this.getScore(this.state.playerhand) === "Bust") {
+      this.setState({
+        winner: "dealer",
+      });
+    }
   };
 
   addCardToDealer = () => {
@@ -213,14 +216,11 @@ export default class BlackJack extends Component {
   }
 
   playerStayButton = () => {
-    // console.log("Stay button clicked");
-
-    // set variables just for the purpose of the code being easier to read.
     let dealerScore = this.getScore(this.state.dealerhand);
     let playerscore = this.getScore(this.state.playerhand);
 
     let dealerhand;
-    if (this.getScore(this.state.dealerhand) < playerscore) {
+    if (dealerScore < playerscore) {
       dealerhand = [...this.state.dealerhand];
       const deck = [...this.state.deck];
       let new_card;
@@ -246,16 +246,16 @@ export default class BlackJack extends Component {
 
     dealerScore = this.getScore(dealerhand);
 
-    console.log(`Player Score: ${playerscore}`);
-    console.log(`Dealer Score: ${dealerScore}`);
+    // console.log(`Player Score: ${playerscore}`);
+    // console.log(`Dealer Score: ${dealerScore}`);
 
     if (dealerScore === "Bust" && playerscore <= 21) {
-      console.log("Player Wins");
+      // console.log("Player Wins");
       this.setState({
         winner: "player",
       });
     } else {
-      console.log("Dealer Wins");
+      // console.log("Dealer Wins");
       this.setState({
         winner: "dealer",
       });
